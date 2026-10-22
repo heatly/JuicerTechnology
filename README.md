@@ -1,20 +1,9 @@
-# Juicer Technology Website
+# Juicer Technology website (v2)
 
-## Deploy to Vercel
+Next.js 15 (App Router) · TypeScript · Tailwind · Framer Motion. Content is typed TS in `src/content/`. UI primitives in `src/components/ui` follow the shadcn/ui pattern (cva + tailwind-merge), written by hand rather than via the CLI.
 
-1. Upload this folder to GitHub
-2. Import repository into Vercel
-3. Add your EmailJS Public Key inside index.html:
-   YOUR_PUBLIC_KEY_HERE
+```bash
+npm install && npm run dev
+```
 
-## Domain Setup
-Connect:
-- juicertechnology.com
-- www.juicertechnology.com
-
-DNS:
-A Record:
-76.76.21.21
-
-CNAME:
-cname.vercel-dns.com
+Docs: [Strategy, sitemap, brand, copy](docs/STRATEGY.md) · [Deployment](docs/DEPLOYMENT.md) · [Content guide](docs/CONTENT-GUIDE.md)
