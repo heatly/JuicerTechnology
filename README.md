@@ -1,9 +1,9 @@
-# Juicer Technology website (v2)
+# Juicer Technology website
 
-Next.js 15 (App Router) · TypeScript · Tailwind · Framer Motion. Content is typed TS in `src/content/`. UI primitives in `src/components/ui` follow the shadcn/ui pattern (cva + tailwind-merge), written by hand rather than via the CLI.
+Egocentric data sourcing and robotics for physical AI. Next.js 15 (App Router), TypeScript, Tailwind, Framer Motion.
 
 ```bash
 npm install && npm run dev
 ```
 
-Docs: [Strategy, sitemap, brand, copy](docs/STRATEGY.md) · [Deployment](docs/DEPLOYMENT.md) · [Content guide](docs/CONTENT-GUIDE.md)
+Docs: [Strategy](docs/STRATEGY.md) · [Deployment](docs/DEPLOYMENT.md) · [Content guide](docs/CONTENT-GUIDE.md)

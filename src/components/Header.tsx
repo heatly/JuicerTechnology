@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 import { ButtonLink } from "./ui/button";
@@ -30,27 +30,13 @@ export function Header() {
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
           {nav.map((item) => (
-            <div key={item.label} className="group relative">
-              <Link href={item.href} className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-muted transition hover:text-fg">
-                {item.label}
-                {item.children && <ChevronDown className="h-3.5 w-3.5" aria-hidden />}
-              </Link>
-              {item.children && (
-                <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <div className="glass min-w-60 rounded-2xl bg-bg/90 p-2 shadow-2xl">
-                    {item.children.map((c) => (
-                      <Link key={c.href} href={c.href} className="block rounded-xl px-4 py-2.5 text-sm hover:bg-fg/10">{c.label}</Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+            <Link key={item.href} href={item.href} className="rounded-full px-4 py-2 text-sm font-medium text-muted transition hover:text-fg">{item.label}</Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <ButtonLink href="/join" size="sm" className="hidden sm:inline-flex">Join Juicer</ButtonLink>
+          <ButtonLink href="/contact#data" size="sm" variant="volt" className="hidden sm:inline-flex">Request data</ButtonLink>
           <button className="grid h-10 w-10 place-items-center rounded-full border border-fg/20 lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -60,14 +46,9 @@ export function Header() {
       {open && (
         <nav className="container max-h-[80vh] overflow-y-auto pb-6 lg:hidden" aria-label="Mobile">
           {nav.map((item) => (
-            <div key={item.label} className="border-t border-fg/10 py-3">
-              <Link href={item.href} className="font-display text-lg font-semibold">{item.label}</Link>
-              <div className="mt-2 grid gap-1 pl-3">
-                {item.children?.map((c) => <Link key={c.href} href={c.href} className="py-1.5 text-sm text-muted">{c.label}</Link>)}
-              </div>
-            </div>
+            <div key={item.href} className="border-t border-fg/10 py-3"><Link href={item.href} className="font-display text-lg font-semibold">{item.label}</Link></div>
           ))}
-          <ButtonLink href="/join" className="mt-4 w-full">Join Juicer</ButtonLink>
+          <ButtonLink href="/contact#data" variant="volt" className="mt-4 w-full">Request data</ButtonLink>
         </nav>
       )}
     </header>
