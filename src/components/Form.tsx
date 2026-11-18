@@ -92,7 +92,7 @@ export function Form({
                 {f.options?.map((o) => <option key={o} value={o} className="text-black">{o}</option>)}
               </select>
             ) : (
-              <input id={id} name={f.name} type={f.type ?? "text"} required={f.required} placeholder={f.placeholder} min={f.type === "number" ? 1 : undefined} className={input} />
+              <input id={id} name={f.name} type={f.type ?? "text"} required={f.required} placeholder={f.placeholder} min={f.min ?? (f.type === "number" ? 1 : undefined)} max={f.max} inputMode={f.type === "tel" ? "tel" : f.type === "number" ? "numeric" : undefined} pattern={f.type === "tel" ? "[0-9+ ]{10,15}" : undefined} title={f.type === "tel" ? "Enter a 10 digit mobile number" : undefined} autoComplete={f.name === "name" ? "name" : f.type === "tel" ? "tel" : f.type === "email" ? "email" : undefined} className={input} />
             )}
             {f.hint && <p className="mt-1 text-xs text-muted">{f.hint}</p>}
           </div>

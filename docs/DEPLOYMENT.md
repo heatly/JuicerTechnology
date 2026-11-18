@@ -1,4 +1,4 @@
-# Deployment
+# Deployment and hiring-ad setup
 
 ## Run locally
 ```bash
@@ -7,45 +7,35 @@ npm run dev        # http://localhost:3000
 npm run build && npm start
 ```
 
-## Deploy to Vercel (recommended)
-1. Push the folder to a GitHub repo.
-2. Import it at vercel.com, framework auto-detected as Next.js.
-3. Add the environment variables from `.env.example` (below).
-4. Add the domain `juicertechnology.com` under Settings → Domains and update DNS as shown.
-5. Redeploy. Check `/sitemap.xml`, `/robots.txt` and an event page's structured data (Google Rich Results Test).
+## Vercel
+Push to `main` on `heatly/JuicerTechnology`; Vercel builds (`vercel.json` forces the Next.js preset). Add the environment variables below under Project → Settings → Environment Variables, then redeploy.
 
-## Environment variables
 | Variable | Purpose |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | canonical URL, sitemap, schema |
-| `NEXT_PUBLIC_GA4_ID` | GA4 measurement ID (G-XXXX) |
-| `NEXT_PUBLIC_META_PIXEL_ID` | Meta Pixel; form success fires `Lead` |
-| `GOOGLE_SHEETS_WEBHOOK_URL` | forms → Google Sheet |
-| `RESEND_API_KEY`, `FORMS_TO_EMAIL`, `FORMS_FROM_EMAIL` | forms → email (resend.com, verify your domain) |
-| `TRACKING_WEBHOOK_URL` | order tracking lookup |
+| `NEXT_PUBLIC_SITE_URL` | canonical URL, sitemap |
+| `GOOGLE_SHEETS_WEBHOOK_URL` | **all forms, including job applications, go to your Google Sheet** |
+| `RESEND_API_KEY`, `FORMS_TO_EMAIL`, `FORMS_FROM_EMAIL` | optional email copy of each submission |
+| `NEXT_PUBLIC_GA4_ID` | GA4 |
+| `NEXT_PUBLIC_GADS_ID` | Google Ads tag, e.g. `AW-1234567890` |
+| `NEXT_PUBLIC_GADS_APPLY_LABEL` | Google Ads conversion label for the application |
+| `NEXT_PUBLIC_META_PIXEL_ID` | optional Meta Pixel |
 
-In production, a form with neither Sheets nor email configured returns an error rather than silently dropping leads.
+If neither the Sheet nor email is configured, forms return an error in production rather than dropping applications silently.
 
-## Google Sheets form delivery
-1. Create a Sheet. Extensions → Apps Script. Paste:
-```js
-function doPost(e) {
-  const d = JSON.parse(e.postData.contents);
-  const sh = SpreadsheetApp.getActive().getSheetByName(d.form) || SpreadsheetApp.getActive().insertSheet(d.form);
-  if (sh.getLastRow() === 0) sh.appendRow(Object.keys(d));
-  const headers = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
-  sh.appendRow(headers.map(h => d[h] ?? ""));
-  return ContentService.createTextOutput("ok");
-}
-```
-2. Deploy → New deployment → Web app → execute as you, access "Anyone". Copy the URL into `GOOGLE_SHEETS_WEBHOOK_URL`.
-(Each form gets its own tab. If a later submission has new fields, add the column header.)
+## Google Sheet for applications (do this first)
+1. Create a Google Sheet (e.g. "Juicer applications").
+2. Extensions → Apps Script. Delete the sample code and paste the contents of `docs/google-apps-script.gs`. Save.
+3. Deploy → New deployment → type **Web app** → Execute as **Me**, Who has access **Anyone** → Deploy. Authorise when asked.
+4. Copy the Web app URL (ends in `/exec`) into Vercel as `GOOGLE_SHEETS_WEBHOOK_URL`, then redeploy.
+5. Submit a test application on `/apply`. A tab named `apply` appears with these columns: form, submittedAt, page, name, age, phone, twoWheeler, licence, smartphone, location, availability, experience, consent, utm (contains gclid and campaign tags).
 
-## Order tracking
-Add an "Orders" sheet with columns `id, status, updated, note` (status is one of: Quote approved, Design proof, In production, Quality check, Shipped, Delivered). Deploy an Apps Script `doGet(e)` that finds the row for `e.parameter.id` and returns JSON `{status, updated, note}`; put its URL in `TRACKING_WEBHOOK_URL`.
+If you change the script later, use Deploy → Manage deployments → Edit → New version (the URL stays the same).
 
-## Ads and attribution
-UTM, `gclid` and `fbclid` are saved per session and sent with every form submission. Use UTM-tagged links in campaigns, e.g. `?utm_source=instagram&utm_medium=paid&utm_campaign=hack-hyd`.
+## Google Ads
+- **Landing page URL:** `https://juicertechnology.com/apply`. Use it as the final URL of the ad and the poster QR code.
+- **Tracking:** in Google Ads create a Conversion action (Website → "Submit lead form"), copy the tag ID (`AW-...`) and the conversion label into the two variables above. A conversion is recorded when someone submits the form.
+- **Tagging links:** add UTMs, e.g. `/apply?utm_source=google&utm_medium=cpc&utm_campaign=chennai-operator`. They and the `gclid` are saved in the sheet's `utm` column.
+- **Employment ads policy:** keep the ad text consistent with the page (pay range, requirements, no application fee). Do not promise guaranteed earnings.
 
-## Performance
-Static prerendering for almost every page, canvas (not a 3D library) for graphics, the 3D scene is lazy-loaded, fonts via `next/font`. Run Lighthouse on the deployed URL; I have not measured the 90+ target yet.
+## Poster
+Print a QR code that points to the `/apply` URL with `?utm_source=poster&utm_medium=print&utm_campaign=<area>` so you can see which posters bring applicants.

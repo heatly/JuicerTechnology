@@ -24,6 +24,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Enter a valid email address" }, { status: 422 });
   }
 
+  if (data.phone && !/^[0-9+ ]{10,15}$/.test(data.phone)) return NextResponse.json({ error: "Enter a valid 10 digit phone number" }, { status: 422 });
+  if (body.type === "apply") {
+    const age = Number(data.age);
+    if (!Number.isFinite(age) || age < 18 || age > 65) return NextResponse.json({ error: "You must be 18 or older to apply" }, { status: 422 });
+  }
+
   const record = {
     form: body.type as string,
     submittedAt: new Date().toISOString(),

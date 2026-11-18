@@ -6,6 +6,8 @@ export type Field = {
   options?: string[];
   placeholder?: string;
   hint?: string;
+  min?: number;
+  max?: number;
 };
 
 export type FormDef = { title: string; submit: string; success: string; fields: Field[] };
@@ -14,6 +16,23 @@ const name: Field = { name: "name", label: "Full name", required: true };
 const email: Field = { name: "email", label: "Work email", type: "email", required: true };
 
 export const forms: Record<string, FormDef> = {
+  apply: {
+    title: "Apply now",
+    submit: "Submit application",
+    success: "Thank you! Our team will call you on the number you gave.",
+    fields: [
+      name,
+      { name: "age", label: "Age", type: "number", required: true, min: 18, max: 65, hint: "You must be 18 or older." },
+      { name: "phone", label: "Phone number (WhatsApp preferred)", type: "tel", required: true },
+      { name: "twoWheeler", label: "Two-wheeler", type: "select", required: true, options: ["Yes, I have a two-wheeler", "No, but I can arrange one", "No"] },
+      { name: "licence", label: "Driving licence", type: "select", required: true, options: ["Yes", "No"] },
+      { name: "smartphone", label: "Do you have a smartphone?", type: "select", required: true, options: ["Yes", "No"] },
+      { name: "location", label: "Location (city and area)", required: true, placeholder: "e.g. Chennai, Tambaram" },
+      { name: "availability", label: "Work type you want", type: "select", required: true, options: ["Full-time (monthly)", "Part-time", "Per-day work"] },
+      { name: "experience", label: "Any past field or sales work? (optional)", type: "textarea" },
+      { name: "consent", label: "I agree to be contacted about this job. My details will be used only for hiring.", type: "checkbox", required: true },
+    ],
+  },
   "data-request": {
     title: "Request data",
     submit: "Send request",

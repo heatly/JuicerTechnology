@@ -1,6 +1,6 @@
-import { Video, Layers, Hand, Mic, Activity, Gamepad2, Tags, ShieldCheck, ClipboardList, UsersRound, Camera, ScanSearch, PackageCheck, Hammer, Shirt, ChefHat, CircuitBoard, Warehouse, Wheat, Home, HeartHandshake, BadgeCheck, Banknote, EyeOff, Boxes, Database, Crosshair, Cpu, Wrench, Handshake, Sparkles, type LucideIcon } from "lucide-react";
+import { Video, Layers, Hand, Mic, Activity, Gamepad2, Tags, ShieldCheck, ClipboardList, UsersRound, Camera, ScanSearch, PackageCheck, Hammer, Shirt, ChefHat, CircuitBoard, Warehouse, Wheat, Home, HeartHandshake, BadgeCheck, Banknote, EyeOff, Boxes, Database, Crosshair, Cpu, Wrench, Handshake, Sparkles, Smartphone, Bike, IndianRupee, CalendarDays, Send, Smile, BookOpen, PhoneCall, Clock, type LucideIcon } from "lucide-react";
 
-const Icons: Record<string, LucideIcon> = { Video, Layers, Hand, Mic, Activity, Gamepad2, Tags, ShieldCheck, ClipboardList, UsersRound, Camera, ScanSearch, PackageCheck, Hammer, Shirt, ChefHat, CircuitBoard, Warehouse, Wheat, Home, HeartHandshake, BadgeCheck, Banknote, EyeOff, Boxes, Database, Crosshair, Cpu, Wrench, Handshake, Sparkles };
+const Icons: Record<string, LucideIcon> = { Video, Layers, Hand, Mic, Activity, Gamepad2, Tags, ShieldCheck, ClipboardList, UsersRound, Camera, ScanSearch, PackageCheck, Hammer, Shirt, ChefHat, CircuitBoard, Warehouse, Wheat, Home, HeartHandshake, BadgeCheck, Banknote, EyeOff, Boxes, Database, Crosshair, Cpu, Wrench, Handshake, Sparkles, Smartphone, Bike, IndianRupee, CalendarDays, Send, Smile, BookOpen, PhoneCall, Clock };
 import { HeroBackground } from "@/components/HeroBackground";
 import { FloatingSlices } from "@/components/Motion";
 import { Reveal } from "@/components/Reveal";

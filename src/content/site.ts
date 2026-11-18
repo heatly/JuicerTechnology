@@ -15,5 +15,6 @@ export const site = {
 export const nav = [
   { label: "Egocentric Data", href: "/egocentric-data" },
   { label: "Robotics", href: "/robotics" },
+  { label: "Jobs", href: "/apply" },
   { label: "Contact", href: "/contact" },
 ];
