@@ -47,7 +47,7 @@ export default function Apply() {
               <p className="mt-5 max-w-xl text-lg text-muted">Forward Deployment Engineer for physical AI. You visit workers in your area, explain our project, and invite them to wear a small camera while they work. Always by choice, never by pressure.</p>
             </Reveal>
             <Reveal delay={0.15}>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div id="pay" className="mt-6 grid scroll-mt-24 gap-3 sm:grid-cols-2">
                 {facts.map((f) => (
                   <div key={f.t} className="glass flex items-start gap-3 rounded-2xl p-4">
                     <Icon name={f.icon} className="mt-0.5 h-6 w-6 shrink-0 text-accent" />
@@ -68,7 +68,7 @@ export default function Apply() {
       <section className="section">
         <div className="container grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="h-display text-3xl md:text-4xl">What you will do</h2>
+            <h2 id="what-you-do" className="h-display scroll-mt-24 text-3xl md:text-4xl">What you will do</h2>
             <ul className="mt-5 space-y-3 text-muted">
               <li>Meet workers such as tailors, cooks and mechanics in your area.</li>
               <li>Explain the project in simple words and answer their questions.</li>
@@ -77,7 +77,7 @@ export default function Apply() {
             </ul>
           </div>
           <div>
-            <h2 className="h-display text-3xl md:text-4xl">What you need</h2>
+            <h2 id="requirements" className="h-display scroll-mt-24 text-3xl md:text-4xl">What you need</h2>
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               {needs.map((n) => <Card key={n.t} className="text-center"><Icon name={n.icon} className="mx-auto h-8 w-8 text-accent" /><p className="mt-3 font-display font-semibold">{n.t}</p></Card>)}
             </div>
@@ -88,7 +88,7 @@ export default function Apply() {
 
       <section className="section border-y border-fg/10 bg-surface/40">
         <div className="container">
-          <h2 className="h-display text-3xl md:text-4xl">How it works</h2>
+          <h2 id="how-it-works" className="h-display scroll-mt-24 text-3xl md:text-4xl">How it works</h2>
           <ol className="mt-8 grid gap-4 md:grid-cols-4">
             {steps.map((s, i) => (
               <li key={s.t} className="glass rounded-2xl p-5">
@@ -104,7 +104,7 @@ export default function Apply() {
 
       <section className="section">
         <div className="container max-w-3xl">
-          <h2 className="h-display text-3xl md:text-4xl">Common questions</h2>
+          <h2 id="faq" className="h-display scroll-mt-24 text-3xl md:text-4xl">Common questions</h2>
           <div className="mt-6 divide-y divide-fg/10">
             {[
               ["Is this a real, registered job?", "Yes. Juicer Technology is a registered company and payment is made as agreed: daily, weekly or monthly."],
