@@ -75,7 +75,6 @@ export default function Apply() {
               <li>Invite them to wear a camera while they do their normal work. They sign a consent form first, and they can say no at any time.</li>
               <li>Share a short update of your day in our Telegram group.</li>
             </ul>
-            <p className="mt-5 rounded-2xl border border-lime/40 p-4 text-sm"><b>Our rule:</b> no forcing, no arrogance. Only people with a gentle, respectful way of talking will do well in this role.</p>
           </div>
           <div>
             <h2 className="h-display text-3xl md:text-4xl">What you need</h2>
