@@ -41,7 +41,13 @@ export async function POST(req: Request) {
   const tasks: Promise<Response>[] = [];
   const sheets = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (sheets)
-    tasks.push(fetch(sheets, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(record) }));
+    tasks.push(
+      fetch(sheets, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...record, token: process.env.SHEETS_SHARED_SECRET }),
+      })
+    );
 
   const key = process.env.RESEND_API_KEY;
   const to = process.env.FORMS_TO_EMAIL;

@@ -29,6 +29,9 @@ If neither the Sheet nor email is configured, forms return an error in productio
 4. Copy the Web app URL (ends in `/exec`) into Vercel as `GOOGLE_SHEETS_WEBHOOK_URL`, then redeploy.
 5. Submit a test application on `/apply`. A tab named `apply` appears with these columns: form, submittedAt, page, name, age, phone, twoWheeler, licence, smartphone, location, availability, experience, consent, utm (contains gclid and campaign tags).
 
+6. **Recommended hardening:** in the script set `SECRET` to a long random string, deploy a new version, and add the same value in Vercel as `SHEETS_SHARED_SECRET`. The script also only accepts the form names in `ALLOWED_FORMS`.
+7. Use the public URL form (`https://script.google.com/macros/s/<DEPLOYMENT_ID>/exec`) in Vercel, not the `/a/macros/<domain>/` variant.
+
 If you change the script later, use Deploy → Manage deployments → Edit → New version (the URL stays the same).
 
 ## Google Ads
